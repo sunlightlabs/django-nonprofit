@@ -1,0 +1,5 @@
+tablib
+
+django
+django-humanity
+django-tablib
