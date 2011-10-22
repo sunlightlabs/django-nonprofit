@@ -1,5 +1,6 @@
 tablib
 
 django
-django-humanity
 django-tablib
+django-tastypie
+-e git://github.com/jcarbaugh/django-humanity.git#egg=humanity

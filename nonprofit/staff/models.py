@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 
-EMPLOYMENT_TYPES = (
+EMPLOYMENT_STATUSES = (
     ('ft', 'Full Time'),
     ('pt', 'Part Time'),
     ('i', 'Internship'),
