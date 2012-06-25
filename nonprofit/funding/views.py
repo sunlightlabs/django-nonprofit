@@ -11,9 +11,11 @@ MIMETYPES = {
 
 # tablib stuff
 
+
 class ContributionDataset(ModelDataset):
     class Meta:
         queryset = Contribution.objects.all()
+
 
 def dyn_amount(row):
     print row
@@ -23,13 +25,16 @@ def dyn_amount(row):
 
 # the views
 
+
 def funding(request):
-    #years = (2011,)
     data = {
         'contributions': Contribution.objects.filter(is_inkind=False),
         'inkind': Contribution.objects.filter(is_inkind=True),
+        'grants': Grant.objects.filter(is_minigrant=False),
+        'minigrants': Grant.objects.filter(is_minigrant=True),
     }
     return render_to_response('about/funding.html', data, context_instance=RequestContext(request))
+
 
 def funding_download(request, ext):
 
@@ -40,11 +45,12 @@ def funding_download(request, ext):
     data = ContributionDataset()
     data.headers = None
     data.append(col=[dyn_amount])
-    data.headers = ['ID','Year','Contributor','Original Amount','Note','Is In-kind Contribution','Amount']
-    del data['ID'] # remove data column
-    del data['Original Amount'] # remove original amount column
+    data.headers = ['ID', 'Year', 'Contributor', 'Original Amount', 'Note', 'Is In-kind Contribution', 'Amount']
+    del data['ID']                  # remove data column
+    del data['Original Amount']     # remove original amount column
 
     return HttpResponse(getattr(data, ext), mimetype=MIMETYPES[ext])
+
 
 def grants(request):
     data = {

@@ -63,6 +63,7 @@ class Member(models.Model):
     primary_location = models.ForeignKey(Location, related_name="members", blank=True, null=True)
 
     bio = models.TextField(blank=True)
+    avatar = models.ImageField()
 
     twitter = models.CharField(max_length=32, blank=True)
     github = models.CharField(max_length=32, blank=True)

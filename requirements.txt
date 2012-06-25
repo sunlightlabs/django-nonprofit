@@ -1,4 +1,8 @@
+# PIL
+
 tablib
+sorl-thumbnail
+redis
 
 django
 django-tablib
