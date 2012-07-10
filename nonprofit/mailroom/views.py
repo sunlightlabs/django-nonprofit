@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from postmark import PMMail
 from nonprofit.mailroom.forms import MailroomForm
 
+
 def contact(request):
 
     if request.method == "POST":
@@ -53,6 +54,5 @@ def contact(request):
 
         form = MailroomForm(label_suffix='')
 
-    return render_to_response("mailroom/form.html",
-                              { "form": form },
+    return render_to_response("mailroom/form.html", {"form": form},
                               context_instance=RequestContext(request))
