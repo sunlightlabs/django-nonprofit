@@ -6,11 +6,12 @@ EMPLOYMENT_STATUSES = (
     ('pt', 'Part Time'),
     ('i', 'Internship'),
     ('f', 'Fellowship'),
-    ('c', 'Contract'),
+    ('c', 'Consultant'),
     ('v', 'Volunteer'),
     ('ex', 'No longer employed'),
     ('o', 'Other'),
 )
+
 
 class Location(models.Model):
     name = models.CharField(max_length=128)
@@ -23,6 +24,7 @@ class Location(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class Department(models.Model):
     name = models.CharField(max_length=128)
@@ -40,9 +42,11 @@ class Department(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class MemberManager(models.Manager):
     def employed(self):
-        return Member.objects.exclude(employment_type='ex')
+        return Member.objects.filter(is_employed=True)
+
 
 class Member(models.Model):
 
@@ -56,6 +60,7 @@ class Member(models.Model):
     department = models.ForeignKey(Department, related_name='members', blank=True, null=True)
     is_department_head = models.BooleanField(default=False)
 
+    is_employed = models.BooleanField(default=True)
     employment_status = models.CharField(max_length=4, choices=EMPLOYMENT_STATUSES)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
@@ -63,7 +68,7 @@ class Member(models.Model):
     primary_location = models.ForeignKey(Location, related_name="members", blank=True, null=True)
 
     bio = models.TextField(blank=True)
-    avatar = models.ImageField()
+    avatar = models.ImageField(upload_to='staff/avatars', blank=True, null=True)
 
     twitter = models.CharField(max_length=32, blank=True)
     github = models.CharField(max_length=32, blank=True)
@@ -86,7 +91,10 @@ class Member(models.Model):
     def __unicode__(self):
         return self.full_name()
 
-    def save(**kwargs):
+    def save(self, **kwargs):
+
+        # update is_employed
+        self.is_employed = self.employment_status in ('ft', 'pt', 'i', 'f')
 
         # make sure there is only one department head
         if self.is_department_head:
@@ -99,6 +107,7 @@ class Member(models.Model):
                 qs = qs.exclude(pk=self.pk)
             qs.update(is_department_head=False)
 
+        # ensure a guid is assigned
         if not self.guid:
             self.guid = uuid.uuid4().hex
 
