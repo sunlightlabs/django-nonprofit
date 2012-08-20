@@ -70,7 +70,8 @@ class Member(models.Model):
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='staff/avatars', blank=True, null=True)
 
-    twitter = models.CharField(max_length=32, blank=True)
+    twitter = models.CharField(max_length=32, blank=True,
+                               help_text="screenname only, no @")
     github = models.CharField(max_length=32, blank=True)
 
     office_phone = models.CharField(max_length=32, blank=True)
@@ -110,6 +111,9 @@ class Member(models.Model):
         # ensure a guid is assigned
         if not self.guid:
             self.guid = uuid.uuid4().hex
+
+        if self.twitter and self.twitter.startswith('@'):
+            self.twitter = self.twitter[1:]
 
         super(Member, self).save(**kwargs)
 
