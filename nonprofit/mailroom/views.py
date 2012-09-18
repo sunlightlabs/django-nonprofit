@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from postmark import PMMail
 from nonprofit.mailroom.forms import MailroomForm
+from nonprofit.mailroom.models import Slot
 
 
 def contact(request):
@@ -53,6 +54,16 @@ def contact(request):
     else:
 
         form = MailroomForm(label_suffix='')
+
+        if "slot" in request.GET:
+
+            try:
+
+                slot = Slot.objects.get(description=request.GET['slot'])
+                form = MailroomForm(label_suffix='', initial={'slot': slot.pk})
+
+            except Slot.DoesNotExist:
+                pass
 
     return render_to_response("mailroom/form.html", {"form": form},
                               context_instance=RequestContext(request))
