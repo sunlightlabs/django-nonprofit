@@ -83,7 +83,7 @@ class Member(models.Model):
     emergency_phone = models.CharField(max_length=32, blank=True)
     emergency_address = models.TextField(blank=True)
 
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     guid = models.CharField(max_length=32, blank=True)
 
     class Meta:
