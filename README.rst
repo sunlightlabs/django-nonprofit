@@ -15,3 +15,6 @@ NONPROFIT_URL_DISPLAY
 
 NONPROFIT_EMAIL
     'contact@sunlightfoundation.com'
+
+NONPROFIT_FUNDING_DOWNLOAD
+    False

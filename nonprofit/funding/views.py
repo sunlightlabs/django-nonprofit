@@ -1,8 +1,12 @@
-from django.http import HttpResponse, Http404
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django_tablib import ModelDataset
 from nonprofit.funding.models import Contribution, Grant
+
+FUNDING_DOWNLOAD = getattr(settings, 'NONPROFIT_FUNDING_DOWNLOAD', False)
 
 MIMETYPES = {
     'csv': 'text/csv',
@@ -37,6 +41,9 @@ def funding(request):
 
 
 def funding_download(request, ext):
+
+    if not FUNDING_DOWNLOAD:
+        return HttpResponseRedirect(reverse('funding'))
 
     ext = ext.lower()
     if ext not in MIMETYPES:
