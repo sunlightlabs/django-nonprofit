@@ -23,7 +23,7 @@ class Contribution(models.Model):
 class Grant(models.Model):
     year = models.IntegerField(default=this_year)
     recipient = models.CharField(max_length=128)
-    recipient_url = models.URLField(verify_exists=False, blank=True)
+    recipient_url = models.URLField(blank=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     purpose = models.TextField(blank=True)
     is_minigrant = models.BooleanField(default=False)
