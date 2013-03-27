@@ -1,10 +1,10 @@
-# PIL
+PIL
 
-tablib
-sorl-thumbnail
 redis
+sorl-thumbnail
+South==0.7.6
+tablib==0.9.11
 
-django
-django-tablib
-django-tastypie
--e git://github.com/jcarbaugh/django-humanity.git#egg=humanity
+django-humanity==0.2
+django-tablib==2.4.1
+django-tastypie==0.9.14
