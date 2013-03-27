@@ -11,6 +11,7 @@ if __name__ == "__main__":
         INSTALLED_APPS=[
             'south',
             'nonprofit.funding',
+            'nonprofit.helpwanted',
             'nonprofit.mailroom',
             'nonprofit.staff',
         ],

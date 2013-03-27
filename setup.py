@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-nonprofit',
-    version='0.2',
+    version='0.3',
     author='Jeremy Carbaugh',
     author_email='jcarbaugh@sunlightfoundation.com',
     description='Django app for managing and publishing basic information related to a non-profit organization.',
@@ -12,7 +12,8 @@ setup(
     license='BSD',
     packages=find_packages(),
     package_data={
-        'nonprofit.mailroom': ['templates/mailroom/*']
+        'nonprofit.mailroom': ['templates/mailroom/*'],
+        'nonprofit.helpwanted': ['templates/helpwanted/*'],
     },
     install_requires=[
         "PIL",
