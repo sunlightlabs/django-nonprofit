@@ -1,11 +1,9 @@
-================
 django-nonprofit
 ================
 
---------
+
 Settings
 --------
-
 
 NONPROFIT_NAME
     'Sunlight Foundation'
