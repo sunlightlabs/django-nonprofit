@@ -4,13 +4,13 @@ from setuptools import setup, find_packages
 setup(
     name='django-nonprofit',
     version='0.2',
-    description='Django app for managing and publishing basic information related to a non-profit organization.',
     author='Jeremy Carbaugh',
     author_email='jcarbaugh@sunlightfoundation.com',
-    license='BSD',
+    description='Django app for managing and publishing basic information related to a non-profit organization.',
+    long_description=open("README.rst").read(),
     url='http://github.com/sunlightlabs/django-nonprofit/',
+    license='BSD',
     packages=find_packages(),
-    # The wildcard ignores hidden files
     package_data={
         'nonprofit.mailroom': ['templates/mailroom/*']
     },

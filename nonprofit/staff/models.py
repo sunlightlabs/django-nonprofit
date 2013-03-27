@@ -69,6 +69,7 @@ class Member(models.Model):
 
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to='staff/avatars', blank=True, null=True)
+    alternate_avatar = models.ImageField(upload_to='staff/avatars-alt', blank=True, null=True)
 
     twitter = models.CharField(max_length=32, blank=True,
                                help_text="screenname only, no @")
