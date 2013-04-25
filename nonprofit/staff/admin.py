@@ -19,7 +19,6 @@ class MemberAdmin(admin.ModelAdmin):
     list_filter = (
         'is_employed', 'department', 'is_department_head',
         'employment_status', 'primary_location')
-    prepopulated_fields = {'slug': ('first_name', 'last_name')}
     readonly_fields = ('guid', 'is_employed')
     search_fields = ('last_name', 'first_name', 'email', 'title', 'bio')
 admin.site.register(Member, MemberAdmin)
